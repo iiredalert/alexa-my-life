@@ -12,6 +12,11 @@ const moment = require('moment');
 
 const APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
 
+/**
+ * For development purposes you can set this token to be the one from the facebook graph explorer.
+ */
+const DEVELOPER_ACCESS_TOKEN = '';
+
 const months = ['January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -22,8 +27,7 @@ const languageStrings = {
         translation: {
             SKILL_NAME: 'My Life',
             DESCRIPTION : 'Welcome to my life, try saying ask my life to tell me about June 2011.',
-            GET_FACT_MESSAGE: "Here's your fact: ",
-            HELP_MESSAGE: 'You can say, tell me about ',
+            HELP_MESSAGE: 'You can say, tell me about 2011',
             HELP_REPROMPT: 'What can I help you with?',
             STOP_MESSAGE: 'Thank you for using My Life!',
         },
@@ -177,6 +181,9 @@ function summarizeComments(postId) {
         var data = res.data;
         var commentCount = res.summary.total_count;
 
+        /**
+         * TODO: Ask user if they want to hear some of the comments?
+         */
 
     });
 }
@@ -244,12 +251,14 @@ exports.handler = (event, context) => {
     }
     alexa.APP_ID = APP_ID;
     // Set the access token for the facebook graph library
-    graph.setAccessToken(event.session.user.accessToken);
 
-    /**
-     * For development purposes you can set this token to be the one from the facebook graph explorer.
-     */
-    graph.setAccessToken('');
+    if (DEVELOPER_ACCESS_TOKEN) {
+        graph.setAccessToken(DEVELOPER_ACCESS_TOKEN);
+    }
+    else {
+        graph.setAccessToken(event.session.user.accessToken);
+    }
+
     // To enable string internationalization (i18n) features, set a resources object.
     alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);
