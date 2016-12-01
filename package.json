@@ -1,0 +1,17 @@
+{
+  "name": "alexa-my-life",
+  "version": "1.0.0",
+  "description": "Lambda function for Alexa My Life",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ivan Martinov",
+  "license": "ISC",
+  "dependencies": {
+    "alexa-sdk": "^1.0.6",
+    "fbgraph": "^1.3.0",
+    "moment": "^2.17.0",
+    "momentjs": "^2.0.0"
+  }
+}
